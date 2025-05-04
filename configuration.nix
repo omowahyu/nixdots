@@ -33,13 +33,15 @@
     bluetooth = {
       enable = true;
       powerOnBoot = true;
+      settings = {
+        General = {
+          Enable = "Source,Sink,Media,Socket";
+        };
+      };
     };
   };
 
-  services = {
-    bluetooth.enable = true;
-    openssh.enable = true;
-  };
+  services.openssh.enable = true;
 
   nix.settings = {
     # Enable flakes and nix-command
