@@ -75,14 +75,14 @@
                 useUserPackages = true;
 		users.omo = import ./home.nix;
                 extraSpecialArgs = { inherit inputs; };
-                sharedModules = [ nixvim.homeManagerModules.nixvim ];
+                sharedModules = [ inputs.nixvim.homeManagerModules.nixvim ];
               };
             }
           ];
         };
 
         # Home-manager standalone configurations
-        homeConfigurations."omo@nixos" = home-manager.lib.homeManagerConfiguration {
+        homeConfigurations."omo@nixos" = inputs.home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages."x86_64-linux";
           extraSpecialArgs = { inherit inputs; };
           modules = [
@@ -93,9 +93,9 @@
 
         # Optional: Add overlays for custom packages
         overlays.default = final: prev: {
-          unstable = nixpkgs-unstable.legacyPackages.${prev.system};
-          nixgl = nixgl.packages.${prev.system};
-          hyprland = hyprland.packages.${prev.system}.hyprland;
+          unstable = inputs.nixpkgs-unstable.legacyPackages.${prev.system};
+          nixgl = inputs.nixgl.packages.${prev.system};
+          hyprland = inputs.hyprland.packages.${prev.system}.hyprland;
           hyprcursor = inputs.hyprcursor.packages.${prev.system}.hyprcursor;
           ax-shell = inputs.ax-shell.packages.${prev.system}.default;
         };

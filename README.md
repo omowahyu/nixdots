@@ -8,5 +8,5 @@
 - `dots/sddm/`: SDDM theme settings
 
 ## Usage
-- Rebuild: `sudo nixos-rebuild switch --flake .#myHost`
+- Rebuild: `sudo nixos-rebuild switch --flake .#omo`
 - Update aliases: Edit `home.nix`
