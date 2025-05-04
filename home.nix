@@ -55,6 +55,7 @@
     };
   };
 
+
   # Hyprland configuration
   wayland.windowManager.hyprland = {
     enable = true;
@@ -66,11 +67,11 @@
       ];
       monitor = [ ",preferred,auto,1" ];
       exec-once = [
-	"swww"
-	"mako"
-	"nm-applet"
+        "hyprpaper"
+        "mako"
+        "nm-applet"
         "blueman-applet"
-        "python ~/.config/Ax-Shell/main.py" # Run Ax-Shell        
+        "python ~/.config/Ax-Shell/main.py"
       ];
       env = [
         "HYPRCURSOR_THEME,HyprBibataModernClassicSVG"
@@ -82,9 +83,7 @@
         kb_layout = "us";
         follow_mouse = 1;
         sensitivity = 0;
-        touchpad = {
-          natural_scroll = true;
-        };
+        touchpad.natural_scroll = true;
       };
       general = {
         gaps_in = 5;
@@ -97,12 +96,14 @@
       };
       decoration = {
         rounding = 10;
+        drop_shadow = true;
+        shadow_range = 4;
+        shadow_render_power = 3;
+        "col.shadow" = "rgba(1a1a1aee)";
       };
       animations = {
         enabled = true;
-        bezier = [
-          "myBezier, 0.05, 0.9, 0.1, 1.05"
-        ];
+        bezier = [ "myBezier, 0.05, 0.9, 0.1, 1.05" ];
         animation = [
           "windows, 1, 7, myBezier"
           "windowsOut, 1, 7, default, popin 80%"
@@ -120,11 +121,17 @@
       misc = {
         force_default_wallpaper = 0;
         disable_hyprland_logo = true;
-        vrr = 1; # Enable Variable Refresh Rate for AMD GPU
-        vfr = true; # Variable frame rate
-        enable_hyprcursor = true; # Enable hyprcursor
+        vrr = 1;
+        vfr = true;
+        enable_hyprcursor = true;
       };
     };
+    # Include additional Hyprland config if needed
+    extraConfig = ''
+      # Add custom Hyprland settings from dots/hyprland/config/hyprland.conf here if necessary
+      # For example:
+      # bind = SUPER, Q, exec, kitty
+    '';
   };
 
   # Waybar configuration (disabled, replaced by Ax-Shell)
@@ -224,7 +231,6 @@
 
   # Hyprland configuration files
   home.file = {
-    ".config/hypr/hyprland.conf".source = ./modules/hyprland/config.conf;
     ".config/hypr/keymap.conf".source = ./modules/hyprland/keymap.conf;
     ".config/hypr/rules.conf".source = ./modules/hyprland/rules.conf;
     ".config/hypr/scripts/change_wallpaper.sh" = {
@@ -251,22 +257,6 @@
       path=/usr/share/icons/Arc/24x24/status/
     '';
     ".config/sddm/wallpaper.jpg".source = ./Wallpapers/wall1.jpg;
-
-    # Ax-Shell configuration
-    ".config/Ax-Shell/main.py".source = "${inputs.ax-shell}/main.py";
-    ".config/Ax-Shell/config.json".text = ''
-      {
-        "theme": "auto",
-        "modules": [
-          {"type": "workspaces"},
-          {"type": "window"},
-          {"type": "clock"},
-          {"type": "pulseaudio"},
-          {"type": "network"},
-          {"type": "tray"}
-        ]
-      }
-    '';
 
     # hyprcursor theme
     ".local/share/icons/HyprBibataModernClassicSVG".source = fetchTarball {
