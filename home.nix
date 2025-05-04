@@ -67,6 +67,13 @@ in
       #dns-test = "dig +short txt resolver.dnscrypt.info @127.0.0.1";
       #dns-stat = "sudo dnscrypt-proxy -config ${config.services.dnscrypt-proxy2.settingsFile} -list";
     };
+
+    # Auto-source .zshrc setelah rebuild (opsional)
+    initExtra = ''
+      if [[ -n "$IN_NIX_SHELL" ]]; then
+        source ~/.zshrc
+      fi
+    '';
   };
 
   # Kitty terminal
