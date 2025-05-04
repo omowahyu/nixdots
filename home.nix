@@ -1,12 +1,19 @@
 { config, pkgs, inputs, ... }:
 
+let
+  axShellSrc = pkgs.fetchFromGitHub {
+    owner = "Axenide";
+    repo = "Ax-Shell";
+    rev = "main";
+    sha256 = "1jkrxvkbalmb63ysvcys12v5y2hg6vig3y78hjhjllvjqi5qwdhv";
+  };
+in
+
 {
 
-  home = {
-    username = "omo";
-    homeDirectory = "/home/omo";
-    stateVersion = "24.11"; # Home Manager state version
-  };
+  home.username = "omo";
+  home.homeDirectory = "/home/omo";
+  home.itateVersion = "24.11"; # Home Manager state version
 
   programs.home-manager.enable = true; # Enable Home Manager
   fonts.fontconfig.enable = true; # Fonts 
@@ -67,7 +74,7 @@
       ];
       monitor = [ ",preferred,auto,1" ];
       exec-once = [
-        "hyprpaper"
+        "swww init && swww img /home/omo/.dots/Wallpapers/wall1.jpg --transition-type fade --transition-fps 60"
         "mako"
         "nm-applet"
         "blueman-applet"
