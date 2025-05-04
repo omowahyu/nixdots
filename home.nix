@@ -16,7 +16,29 @@ in
   home.stateVersion = "24.11"; # Home Manager state version
 
   programs.home-manager.enable = true; # Enable Home Manager
-  fonts.fontconfig.enable = true; # Fonts 
+  fonts.fontconfig.enable = true; # Fonts
+ 
+  # Home packages
+  home.packages = with pkgs; [
+    hyprpaper
+    rofi-wayland
+    mako
+    (inputs.zen-browser.packages."x86_64-linux".default)
+    slock
+    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    bluez
+    bc
+    xclip # For pbcopy/pbpaste
+    eza # For ls, ll, la
+    xfce.thunar # For open
+    python3 # For Ax-Shell
+    python3Packages.fabric # For Ax-Shell
+    matugen # For Ax-Shell color theming
+    dnsutils  # Untuk dig + nslookup
+    dnstop    # Monitor traffic DNS
+    ndisc6    # Tools IPv6
+  ];
+
 
   # Zsh configuration
   programs.zsh = {
@@ -41,13 +63,16 @@ in
       nixclean = "nix-collect-garbage -d";
       hyprd = "hyprctl dispatch";
       bt = "~/.config/hypr/scripts/rofi-bluetooth.sh";
+      #dns-flush = "sudo resolvectl flush-caches && sudo pkill -HUP dnscrypt-proxy";
+      #dns-test = "dig +short txt resolver.dnscrypt.info @127.0.0.1";
+      #dns-stat = "sudo dnscrypt-proxy -config ${config.services.dnscrypt-proxy2.settingsFile} -list";
     };
   };
 
   # Kitty terminal
   programs.kitty = {
     enable = true;
-    themeFile = "Gruvbox_Dark";
+    themeFile = "SpaceGray_Eighties";
     font = {
       name = "JetBrainsMono Nerd Font";
       size = 12;
@@ -126,7 +151,6 @@ in
         disable_hyprland_logo = true;
         vrr = 1;
         vfr = true;
-        enable_hyprcursor = true;
       };
     };
     # Include additional Hyprland config if needed
@@ -213,24 +237,6 @@ in
       pyright # LSP for Python
     ];
   };
-
-  # Home packages
-  home.packages = with pkgs; [
-    hyprpaper
-    rofi-wayland
-    mako
-    (inputs.zen-browser.packages."x86_64-linux".default)
-    slock
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
-    bluez
-    bc
-    xclip # For pbcopy/pbpaste
-    eza # For ls, ll, la
-    xfce.thunar # For open
-    python3 # For Ax-Shell
-    python3Packages.fabric # For Ax-Shell
-    matugen # For Ax-Shell color theming
-  ];
 
   # Hyprland configuration files
   home.file = {

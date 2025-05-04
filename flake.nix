@@ -62,6 +62,7 @@
           specialArgs = { inherit inputs; };
           modules = [
             ./configuration.nix
+	   # ./dnscrypt-proxy.nix
             inputs.nixos-hardware.nixosModules.common-cpu-amd
             inputs.nixos-hardware.nixosModules.common-gpu-amd
             inputs.home-manager.nixosModules.home-manager
