@@ -130,22 +130,78 @@
   # Waybar configuration (disabled, replaced by Ax-Shell)
   programs.waybar.enable = false;
 
-  # NixVim configuration
+# NixVim configuration with LazyVim
   programs.nixvim = {
-    enable = true
-    colorschemes.catppuccin.enable = true;
-    plugins = {
-      lsp = {
-        enable = true;
-        servers = 
-          nil_ls.enable = true;
-          pyright.enable = true;{
-        };
-      }
-      telescope.enable = true;
-      nvim-tree.enable = true;
-      web-devicons.enable = true;;
-    };
+    enable = true;
+    extraConfigLua = ''
+      -- Bootstrap lazy.nvim
+      local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+      if not vim.loop.fs_stat(lazypath) then
+        vim.fn.system({
+          "git",
+          "clone",
+          "--filter=blob:none",
+          "https://github.com/folke/lazy.nvim.git",
+          "--branch=stable",
+          lazypath,
+        })
+      end
+      vim.opt.rtp:prepend(lazypath)
+
+      -- Setup lazy.nvim
+      require("lazy").setup({
+        {
+          "catppuccin/nvim",
+          name = "catppuccin",
+          config = function()
+            require("catppuccin").setup({
+              flavour = "mocha",
+              transparent_background = false,
+            })
+            vim.cmd.colorscheme "catppuccin"
+          end,
+        },
+        {
+          "nvim-telescope/telescope.nvim",
+          dependencies = { "nvim-lua/plenary.nvim" },
+        },
+        {
+          "kyazdani42/nvim-tree.lua",
+          dependencies = { "kyazdani42/nvim-web-devicons" },
+          config = function()
+            require("nvim-tree").setup {}
+          end,
+        },
+        {
+          "neovim/nvim-lspconfig",
+          config = function()
+            local lspconfig = require("lspconfig")
+            lspconfig.nil_ls.setup {}
+            lspconfig.pyright.setup {}
+          end,
+        },
+      }, {
+        performance = {
+          rtp = {
+            disabled_plugins = {
+              "gzip",
+              "matchit",
+              "matchparen",
+              "netrwPlugin",
+              "tarPlugin",
+              "tohtml",
+              "tutor",
+              "zipPlugin",
+            },
+          },
+        },
+      })
+    '';
+    extraPackages = with pkgs; [
+      git # Required for lazy.nvim to clone plugins
+      nil # LSP for Nix
+      pyright # LSP for Python
+    ];
   };
 
   # Home packages
@@ -168,23 +224,23 @@
 
   # Hyprland configuration files
   home.file = {
-    ".config/hypr/hyprland.conf".source = ./dots/hyprland/config/hyprland.conf;
-    ".config/hypr/keymap.conf".source = ./dots/hyprland/keymap/keymap.conf;
-    ".config/hypr/rules.conf".source = ./dots/hyprland/rules/rules.conf;
+    ".config/hypr/hyprland.conf".source = ./dots/hyprland/config.conf;
+    ".config/hypr/keymap.conf".source = ./dots/hyprland/keymap.conf;
+    ".config/hypr/rules.conf".source = ./dots/hyprland/rules.conf;
     ".config/hypr/scripts/change_wallpaper.sh" = {
       source = ./dots/hyprland/scripts/change_wallpaper.sh;
       executable = true;
     };
-    ".config/hypr/scripts/rofi_powermenu.sh" = {
-      source = ./dots/hyprland/scripts/rofi_powermenu.sh;
+    ".config/hypr/scripts/powermenu.sh" = {
+      source = ./dots/hyprland/scripts/powermenu.sh;
       executable = true;
     };
-    ".config/hypr/scripts/rofi-bluetooth.sh" = {
-      source = ./dots/hyprland/scripts/rofi-bluetooth.sh;
+    ".config/hypr/scripts/bluetooth.sh" = {
+      source = ./dots/hyprland/scripts/bluetooth.sh;
       executable = true;
     };
     ".config/hypr/hyprpaper.conf".text = ''
-      wallpaper = ,/home/myUser/Pictures/Wallpapers/wallpaper.jpg
+      wallpaper = ,/home/omo/.dots/Wallpapers/wall1.jpg
     '';
     ".config/mako/config".text = ''
       width=300
@@ -194,7 +250,7 @@
       text=<b>%s</b>: %b
       path=/usr/share/icons/Arc/24x24/status/
     '';
-    ".config/sddm/wallpaper.jpg".source = ./dots/sddm/wallpaper.jpg;
+    ".config/sddm/wallpaper.jpg".source = ./dots/Wallpapers/wall1.jpg;
 
     # Ax-Shell configuration
     ".config/Ax-Shell/main.py".source = "${inputs.ax-shell}/main.py";
