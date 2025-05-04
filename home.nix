@@ -224,19 +224,19 @@
 
   # Hyprland configuration files
   home.file = {
-    ".config/hypr/hyprland.conf".source = ./dots/modules/hyprland/config.conf;
-    ".config/hypr/keymap.conf".source = ./dots/modules/hyprland/keymap.conf;
-    ".config/hypr/rules.conf".source = ./dots/modules/hyprland/rules.conf;
+    ".config/hypr/hyprland.conf".source = ./modules/hyprland/config.conf;
+    ".config/hypr/keymap.conf".source = ./modules/hyprland/keymap.conf;
+    ".config/hypr/rules.conf".source = ./modules/hyprland/rules.conf;
     ".config/hypr/scripts/change_wallpaper.sh" = {
-      source = ./dots/modules/hyprland/scripts/change_wallpaper.sh;
+      source = ./modules/hyprland/scripts/change_wallpaper.sh;
       executable = true;
     };
     ".config/hypr/scripts/powermenu.sh" = {
-      source = ./dots/modules/hyprland/scripts/powermenu.sh;
+      source = ./modules/hyprland/scripts/powermenu.sh;
       executable = true;
     };
     ".config/hypr/scripts/bluetooth.sh" = {
-      source = ./dots/modules/hyprland/scripts/bluetooth.sh;
+      source = ./modules/hyprland/scripts/bluetooth.sh;
       executable = true;
     };
     ".config/hypr/hyprpaper.conf".text = ''
@@ -250,7 +250,7 @@
       text=<b>%s</b>: %b
       path=/usr/share/icons/Arc/24x24/status/
     '';
-    ".config/sddm/wallpaper.jpg".source = ./dots/Wallpapers/wall1.jpg;
+    ".config/sddm/wallpaper.jpg".source = ./Wallpapers/wall1.jpg;
 
     # Ax-Shell configuration
     ".config/Ax-Shell/main.py".source = "${inputs.ax-shell}/main.py";
