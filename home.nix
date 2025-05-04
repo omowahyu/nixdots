@@ -13,7 +13,7 @@ in
 
   home.username = "omo";
   home.homeDirectory = "/home/omo";
-  home.itateVersion = "24.11"; # Home Manager state version
+  home.stateVersion = "24.11"; # Home Manager state version
 
   programs.home-manager.enable = true; # Enable Home Manager
   fonts.fontconfig.enable = true; # Fonts 
