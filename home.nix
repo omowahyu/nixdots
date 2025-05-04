@@ -230,7 +230,7 @@ in
     bc
     xclip # For pbcopy/pbpaste
     eza # For ls, ll, la
-    thunar # For open
+    xfce.thunar # For open
     python3 # For Ax-Shell
     python3Packages.fabric # For Ax-Shell
     matugen # For Ax-Shell color theming
