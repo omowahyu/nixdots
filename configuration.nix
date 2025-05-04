@@ -96,7 +96,7 @@
     wl-clipboard
     bluez
     sddm
-    sddm-chili.theme # SDDM theme
+    sddm-chili-theme # SDDM theme
     qt5.qtquickcontrols2 # Required for SDDM theme rendering
     qt5.qtgraphicaleffects
   ];
