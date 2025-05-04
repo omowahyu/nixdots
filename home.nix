@@ -47,7 +47,7 @@ in
   # Kitty terminal
   programs.kitty = {
     enable = true;
-    themeFile = "Gruvbox Dark";
+    themeFile = "Gruvbox_Dark";
     font = {
       name = "JetBrainsMono Nerd Font";
       size = 12;
