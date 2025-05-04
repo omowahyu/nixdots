@@ -258,10 +258,26 @@
     '';
     ".config/sddm/wallpaper.jpg".source = ./Wallpapers/wall1.jpg;
 
+    # Ax-Shell configuration
+    ".config/Ax-Shell/main.py".source = "${axShellSrc}/main.py";
+    ".config/Ax-Shell/config.json".text = ''
+      {
+        "theme": "auto",
+        "modules": [
+          {"type": "workspaces"},
+          {"type": "window"},
+          {"type": "clock"},
+          {"type": "pulseaudio"},
+          {"type": "network"},
+          {"type": "tray"}
+        ]
+      }
+    '';
+
     # hyprcursor theme
-    ".local/share/icons/HyprBibataModernClassicSVG".source = fetchTarball {
-      url = "https://github.com/ful1e5/Bibata_Cursor/releases/download/v2.0.7/Bibata-Modern-Classic-Hyprcursor.tar.gz";
-      sha256 = "1c8z2l9j2m1z3k4v5n6w7x8y9z0a1b2c3d4e5f6g7h8i9j0k1l2m";
+    ".local/share/icons/CursorBibataModernIce".source = fetchTarball {
+      url = "https://github.com/ful1e5/Bibata_Cursor/releases/download/v2.0.7/Bibata-Modern-Ice.tar.xz";
+      sha256 = "01acywlhs45hisa16ydmyq5r8zr49f7rnf6smz6k3x6avm0wsvs8";
     };
   };
 
