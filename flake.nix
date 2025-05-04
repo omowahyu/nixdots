@@ -20,10 +20,6 @@
       url = "github:hyprwm/hyprcursor";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    ax-shell = { # Hackable Shell Hyprland
-      url = "github:Axenide/Ax-Shell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nixgl = { # OpenGL Compability
       url = "github:guibou/nixGL";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -97,7 +93,6 @@
           nixgl = inputs.nixgl.packages.${prev.system};
           hyprland = inputs.hyprland.packages.${prev.system}.hyprland;
           hyprcursor = inputs.hyprcursor.packages.${prev.system}.hyprcursor;
-          ax-shell = inputs.ax-shell.packages.${prev.system}.default;
         };
       };
     };
