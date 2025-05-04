@@ -224,19 +224,19 @@
 
   # Hyprland configuration files
   home.file = {
-    ".config/hypr/hyprland.conf".source = ./dots/hyprland/config.conf;
-    ".config/hypr/keymap.conf".source = ./dots/hyprland/keymap.conf;
-    ".config/hypr/rules.conf".source = ./dots/hyprland/rules.conf;
+    ".config/hypr/hyprland.conf".source = ./dots/modules/hyprland/config.conf;
+    ".config/hypr/keymap.conf".source = ./dots/modules/hyprland/keymap.conf;
+    ".config/hypr/rules.conf".source = ./dots/modules/hyprland/rules.conf;
     ".config/hypr/scripts/change_wallpaper.sh" = {
-      source = ./dots/hyprland/scripts/change_wallpaper.sh;
+      source = ./dots/modules/hyprland/scripts/change_wallpaper.sh;
       executable = true;
     };
     ".config/hypr/scripts/powermenu.sh" = {
-      source = ./dots/hyprland/scripts/powermenu.sh;
+      source = ./dots/modules/hyprland/scripts/powermenu.sh;
       executable = true;
     };
     ".config/hypr/scripts/bluetooth.sh" = {
-      source = ./dots/hyprland/scripts/bluetooth.sh;
+      source = ./dots/modules/hyprland/scripts/bluetooth.sh;
       executable = true;
     };
     ".config/hypr/hyprpaper.conf".text = ''
